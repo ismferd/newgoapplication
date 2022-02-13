@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	//"newGoApplication/pkg/sanitizerword"
+	//"newGoApplication/pkg/sanitizerwords"
 	"github.com/ismferd/newGoApplication/pkg/sanitizerwords"
 )
 
