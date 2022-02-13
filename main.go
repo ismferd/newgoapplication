@@ -7,7 +7,6 @@ import (
 	"sort"
 	"strings"
 
-	//"newGoApplication/pkg/sanitizerwords"
 	"github.com/ismferd/newGoApplication/pkg/sanitizerwords"
 )
 
@@ -19,20 +18,10 @@ func main() {
 			if err != nil {
 				fmt.Println("Err")
 			}
-			a := WordCount(string(content))
-			fmt.Println(len(a))
+
 			Hasher(string(content))
 		}
 	}
-}
-
-func WordCount(s string) map[string]int {
-	words := strings.Fields(s)
-	m := make(map[string]int)
-	for _, word := range words {
-		m[word] += 1
-	}
-	return m
 }
 
 func Hasher(s string) {
@@ -79,17 +68,3 @@ func Hasher(s string) {
 func RemoveIndex(s []string, index int) []string {
 	return append(s[:index], s[index+1:]...)
 }
-
-/*
-func WordCleaner(s string) string {
-	r := []rune(s)
-	var cleanWord string
-	for i := 0; i < len(r); i++ {
-		if unicode.IsLetter(r[i]) {
-			cleanWord = cleanWord + string(r[i])
-		}
-	}
-	cleanWord = strings.ReplaceAll(cleanWord, " ", "")
-	return strings.ToLower(cleanWord)
-}
-*/
