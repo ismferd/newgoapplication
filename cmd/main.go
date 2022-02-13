@@ -7,8 +7,8 @@ import (
 	"sort"
 	"strings"
 
-	//"newGoApplication/pkg/sanitizerwords"
-	"github.com/ismferd/newGoApplication/pkg/sanitizerword"
+	//"newGoApplication/pkg/sanitizerword"
+	"github.com/ismferd/newGoApplication/pkg/sanitizerwords"
 )
 
 func main() {
@@ -41,7 +41,7 @@ func Hasher(s string) {
 	i := 0
 	hash2 := map[string]int{}
 	for _, word := range words {
-		word := sanitizerword.SanitizerWords(word)
+		word := sanitizerwords.SanitizerWords(word)
 		if len(hasher) == 3 {
 			joiner := strings.Join(hasher, " ")
 			value, isMapContainsKey := hash2[joiner]
