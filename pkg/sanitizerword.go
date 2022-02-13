@@ -1,4 +1,4 @@
-package sanitizerwords
+package sanitizerword
 
 import (
 	"strings"
