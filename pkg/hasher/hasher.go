@@ -26,6 +26,7 @@ func Hasher(r io.Reader) sorter.SortedList {
 		if len(hasher) == 3 {
 			joiner := strings.Join(hasher, " ")
 			hash = HashMakerAndScorer(joiner, hash)
+			// Moving the hasher elements in order to simulate a FIFO
 			hasher[0] = hasher[1]
 			hasher[1] = hasher[2]
 			hasher = RemoveIndex(hasher, 2)
@@ -35,7 +36,7 @@ func Hasher(r io.Reader) sorter.SortedList {
 		}
 		i++
 	}
-	return sorter.Organizer(hash)
+	return sorter.Sorter(hash)
 }
 
 // RemoveIndex will remove the last position of the passed array

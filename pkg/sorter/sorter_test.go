@@ -36,7 +36,7 @@ func TestOrganizer(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Organizer(tt.args.m); !reflect.DeepEqual(got, tt.want) {
+			if got := Sorter(tt.args.m); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Organizer() = %v, want %v", got, tt.want)
 			}
 		})
