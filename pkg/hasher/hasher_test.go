@@ -9,13 +9,13 @@ import (
 )
 
 func TestHasher(t *testing.T) {
-	var (
-		expected = sorter.OrganizedList{
-			sorter.Organized{Key: "bar bar bar", Value: 3},
-			sorter.Organized{Key: "bar bar foo", Value: 1},
-		}
-		fileName = "test.txt"
-	)
+
+	expected := sorter.SortedList{
+		sorter.Sorted{Key: "bar bar bar", Value: 3},
+		sorter.Sorted{Key: "bar bar foo", Value: 1},
+	}
+	fileName := "test.txt"
+
 	r, _ := os.Open(fileName)
 
 	m := Hasher(r)

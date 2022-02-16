@@ -10,7 +10,8 @@ import (
 	"github.com/ismferd/newGoApplication/pkg/sorter"
 )
 
-func Hasher(r io.Reader) sorter.OrganizedList {
+// Hasher is the manager of the whole program it recieve a io reader and return a sortedlist
+func Hasher(r io.Reader) sorter.SortedList {
 	i := 0
 	hasher := []string{}
 	hash := map[string]int{}
@@ -37,10 +38,12 @@ func Hasher(r io.Reader) sorter.OrganizedList {
 	return sorter.Organizer(hash)
 }
 
+// RemoveIndex will remove the last position of the passed array
 func RemoveIndex(s []string, index int) []string {
 	return append(s[:index], s[index+1:]...)
 }
 
+// HashMakerAndScorer will create a new hashmap and also it will increase the score of them
 func HashMakerAndScorer(joiner string, hash map[string]int) map[string]int {
 	value, isMapContainsKey := hash[joiner]
 	if isMapContainsKey {

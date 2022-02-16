@@ -6,7 +6,7 @@ func TestCleanWord(t *testing.T) {
 	type args struct {
 		s string
 	}
-	tests := []struct {
+	expected := []struct {
 		name string
 		args args
 		want string
@@ -22,25 +22,10 @@ func TestCleanWord(t *testing.T) {
 		{"Special Characters", args{"."}, ""},
 		{"Special Characters", args{"2"}, ""},
 	}
-	for _, tt := range tests {
+	for _, tt := range expected {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := SanitizerWords(tt.args.s); got != tt.want {
 				t.Errorf("cleanWord() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func Benchmark(b *testing.B) {
-	var benchmarks = []struct {
-		name string
-	}{
-		{"TestCleanWord Benchmarks"},
-	}
-	for _, bm := range benchmarks {
-		b.Run(bm.name, func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
-
 			}
 		})
 	}
