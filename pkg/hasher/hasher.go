@@ -1,20 +1,27 @@
 package hasher
 
 import (
-	"fmt"
+	"bufio"
+	"io"
+	"log"
 	"strings"
 
 	"github.com/ismferd/newGoApplication/pkg/sanitizerwords"
 	"github.com/ismferd/newGoApplication/pkg/sorter"
 )
 
-func Hasher(s string) {
-	words := strings.Fields(s)
+func Hasher(r io.Reader) sorter.OrganizedList {
 	hasher := []string{}
 	i := 0
 	hash := map[string]int{}
-	for _, word := range words {
-		word := sanitizerwords.SanitizerWords(word)
+	scanner := bufio.NewScanner(r)
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		word := scanner.Text()
+		word = sanitizerwords.SanitizerWords(word)
 		if len(hasher) == 3 {
 			joiner := strings.Join(hasher, " ")
 			value, isMapContainsKey := hash[joiner]
@@ -30,11 +37,7 @@ func Hasher(s string) {
 		hasher = append(hasher, word)
 		i++
 	}
-	ns := sorter.Organizer(hash)
-
-	for i := 0; i < len(ns) && i < 100; i++ {
-		fmt.Println(ns[i])
-	}
+	return sorter.Organizer(hash)
 }
 
 func RemoveIndex(s []string, index int) []string {

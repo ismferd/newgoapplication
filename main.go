@@ -2,69 +2,36 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"log"
 	"os"
-	"sort"
-	"strings"
 
-	"github.com/ismferd/newGoApplication/pkg/sanitizerwords"
+	"github.com/ismferd/newGoApplication/pkg/hasher"
+	"github.com/ismferd/newGoApplication/pkg/sorter"
 )
 
 func main() {
-	if len(os.Args) >= 1 {
+	r := os.Stdin
+	var err error
+	var ns sorter.OrganizedList
+	if len(os.Args) > 1 {
 		for i := 1; i < len(os.Args); i++ {
-			r := os.Args[1]
-			content, err := ioutil.ReadFile(r) // the file is inside the local directory
+			r, err = os.Open(os.Args[i])
 			if err != nil {
-				fmt.Println("Err")
+				log.Fatal(err)
 			}
+			ns = hasher.Hasher(r)
+			sorterOutput(ns)
 
-			Hasher(string(content))
 		}
+	} else {
+		ns = hasher.Hasher(r)
+		sorterOutput(ns)
 	}
+
 }
 
-func Hasher(s string) {
-	words := strings.Fields(s)
-	hasher := []string{}
-	i := 0
-	hash2 := map[string]int{}
-	for _, word := range words {
-		word := sanitizerwords.SanitizerWords(word)
-		if len(hasher) == 3 {
-			joiner := strings.Join(hasher, " ")
-			value, isMapContainsKey := hash2[joiner]
-			if isMapContainsKey {
-				hash2[joiner] = value + 1
-			} else {
-				hash2[joiner] = 1
-			}
-
-			hasher[0] = hasher[1]
-			hasher[1] = hasher[2]
-			hasher = RemoveIndex(hasher, 2)
-		}
-		hasher = append(hasher, word)
-		i++
-	}
-	type Organized struct {
-		Key   string
-		Value int
-	}
-	ns := make([]Organized, 0)
-	for k, v := range hash2 {
-		ns = append(ns, Organized{k, v})
-	}
-
-	// Then sorting the slice by value, higher first.
-	sort.Slice(ns, func(i, j int) bool {
-		return ns[i].Value > ns[j].Value
-	})
+func sorterOutput(ns sorter.OrganizedList) {
 	for i := 0; i < len(ns) && i < 100; i++ {
 		fmt.Println(ns[i])
 	}
-}
-
-func RemoveIndex(s []string, index int) []string {
-	return append(s[:index], s[index+1:]...)
 }

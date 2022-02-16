@@ -7,12 +7,12 @@ import (
 
 func SanitizerWords(s string) string {
 	r := []rune(s)
-	var cleanWord string
+	var sanitizeWord string
 	for i := 0; i < len(r); i++ {
 		if unicode.IsLetter(r[i]) {
-			cleanWord = cleanWord + string(r[i])
+			sanitizeWord = sanitizeWord + string(r[i])
 		}
 	}
-	cleanWord = strings.ReplaceAll(cleanWord, " ", "")
-	return strings.ToLower(cleanWord)
+	sanitizeWord = strings.ReplaceAll(sanitizeWord, " ", "")
+	return strings.ToLower(sanitizeWord)
 }
