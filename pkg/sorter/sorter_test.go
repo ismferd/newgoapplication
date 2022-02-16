@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestOrganizer(t *testing.T) {
+func TestSorter(t *testing.T) {
 	var expectedList = []Sorted{
 		{
 			Key:   " lorem ipsum is",
@@ -26,7 +26,7 @@ func TestOrganizer(t *testing.T) {
 		args args
 		want SortedList
 	}{
-		{"OrganizerTest",
+		{"SortererTest",
 			args{map[string]int{
 				" of the same":      3,
 				" lorem ipsum is":   4,
@@ -37,7 +37,7 @@ func TestOrganizer(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Sorter(tt.args.m); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Organizer() = %v, want %v", got, tt.want)
+				t.Errorf("Sorter() = %v, want %v", got, tt.want)
 			}
 		})
 	}
