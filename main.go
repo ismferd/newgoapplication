@@ -12,7 +12,7 @@ import (
 func main() {
 	r := os.Stdin
 	var err error
-	var ns sorter.OrganizedList
+	var ns sorter.SortedList
 	if len(os.Args) > 1 {
 		for i := 1; i < len(os.Args); i++ {
 			r, err = os.Open(os.Args[i])
@@ -30,7 +30,7 @@ func main() {
 
 }
 
-func sorterOutput(ns sorter.OrganizedList) {
+func sorterOutput(ns sorter.SortedList) {
 	for i := 0; i < len(ns) && i < 100; i++ {
 		fmt.Println(ns[i])
 	}

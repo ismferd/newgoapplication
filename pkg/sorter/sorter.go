@@ -4,25 +4,20 @@ import (
 	"sort"
 )
 
-//Organized Structure to add the organized values from a map
-type Organized struct {
+//Sorted Structure to add the organized values from a map
+type Sorted struct {
 	Key   string
 	Value int
 }
 
-//OrganizedList slice of Organized structure
-type OrganizedList []Organized
+//SortedList slice of Organized structure
+type SortedList []Sorted
 
-//TotalElements number of elements that the Organized structure has
-func (o *OrganizedList) TotalElements() int {
-	return len(*o)
-}
-
-//Organizer receive a map and return a OrganizedList with elements in the correct order
-func Organizer(m map[string]int) OrganizedList {
-	ns := make([]Organized, 0)
+//Sorter receive a map and return a OrganizedList with elements in the correct order
+func Sorter(m map[string]int) SortedList {
+	ns := make([]Sorted, 0)
 	for k, v := range m {
-		ns = append(ns, Organized{k, v})
+		ns = append(ns, Sorted{k, v})
 	}
 
 	// Then sorting the slice by value, higher first.

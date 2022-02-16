@@ -5,6 +5,7 @@ import (
 	"unicode"
 )
 
+// SanitizerWords cleans the word of special chars
 func SanitizerWords(s string) string {
 	r := []rune(s)
 	var sanitizeWord string

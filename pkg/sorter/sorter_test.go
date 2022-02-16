@@ -6,7 +6,7 @@ import (
 )
 
 func TestOrganizer(t *testing.T) {
-	var TestOrganizedList = []Organized{
+	var expectedList = []Sorted{
 		{
 			Key:   " lorem ipsum is",
 			Value: 4,
@@ -24,19 +24,19 @@ func TestOrganizer(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want OrganizedList
+		want SortedList
 	}{
 		{"OrganizerTest",
 			args{map[string]int{
 				" of the same":      3,
 				" lorem ipsum is":   4,
 				" lorem ipsum good": 0,
-			}}, TestOrganizedList,
+			}}, expectedList,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Organizer(tt.args.m); !reflect.DeepEqual(got, tt.want) {
+			if got := Sorter(tt.args.m); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Organizer() = %v, want %v", got, tt.want)
 			}
 		})

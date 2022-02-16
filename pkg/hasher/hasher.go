@@ -10,9 +10,10 @@ import (
 	"github.com/ismferd/newGoApplication/pkg/sorter"
 )
 
-func Hasher(r io.Reader) sorter.OrganizedList {
-	hasher := []string{}
+// Hasher is the manager of the whole program it recieve a io reader and return a sortedlist
+func Hasher(r io.Reader) sorter.SortedList {
 	i := 0
+	hasher := []string{}
 	hash := map[string]int{}
 	scanner := bufio.NewScanner(r)
 	if err := scanner.Err(); err != nil {
@@ -24,22 +25,32 @@ func Hasher(r io.Reader) sorter.OrganizedList {
 		word = sanitizerwords.SanitizerWords(word)
 		if len(hasher) == 3 {
 			joiner := strings.Join(hasher, " ")
-			value, isMapContainsKey := hash[joiner]
-			if isMapContainsKey {
-				hash[joiner] = value + 1
-			} else {
-				hash[joiner] = 1
-			}
+			hash = HashMakerAndScorer(joiner, hash)
+			// Moving the hasher elements in order to simulate a FIFO
 			hasher[0] = hasher[1]
 			hasher[1] = hasher[2]
 			hasher = RemoveIndex(hasher, 2)
 		}
-		hasher = append(hasher, word)
+		if word != "" {
+			hasher = append(hasher, word)
+		}
 		i++
 	}
-	return sorter.Organizer(hash)
+	return sorter.Sorter(hash)
 }
 
+// RemoveIndex will remove the last position of the passed array
 func RemoveIndex(s []string, index int) []string {
 	return append(s[:index], s[index+1:]...)
+}
+
+// HashMakerAndScorer will create a new hashmap and also it will increase the score of them
+func HashMakerAndScorer(joiner string, hash map[string]int) map[string]int {
+	value, isMapContainsKey := hash[joiner]
+	if isMapContainsKey {
+		hash[joiner] = value + 1
+	} else {
+		hash[joiner] = 1
+	}
+	return hash
 }
