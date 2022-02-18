@@ -4,8 +4,8 @@
     - [release newgoapplication](#release-newgoapplication)
 - [how to run the tests](#how-to-run-the-tests)
 - [more information about it](#more-information-about-it)
-    - [what I would do next, given more time](#what-I-would-do-next,-given-more-time)
-    - [are there bugs that I am aware of?](#are-there-bugs-that-I-am-aware-of?)
+    - [what I would do next, given more time](#what-I-would-do-next-given-more-time)
+    - [are there bugs that I am aware of?](#are-there-bugs-that-I-am-aware-of)
 
 newgoapplication is a program executable from the command line that when given text(s) will return a list of the 100 most common three word sequences.
 
