@@ -1,5 +1,12 @@
 # newgoapplication
 
+- [how to run newgoapplication](#how-to-run-newgoapplication)
+    - [release newgoapplication](#release-newgoapplication)
+- [how to run the tests](#how%20to%20run%20the%20tests)
+- [more information about it](#more-information-about-it)
+    - [what I would do next, given more time](##what-I-would-do-next\,-given-more-time)
+    - [are there bugs that I am aware of?](## are there bugs that I am aware of?)
+
 newgoapplication is a program executable from the command line that when given text(s) will return a list of the 100 most common three word sequences.
 
 # how to run newgoapplication
@@ -32,7 +39,7 @@ Just to agilize the development cycle I made a makefile with the following phoni
  clean  Remove previous build
  ```
 
-## Relase newgoapplication
+## release newgoapplication
 
 I added an option to build the dockerfile and push it to the docker registry but you have to set both env vars `DOCKER_PASS` and `DOCKER_USER`, then run `make release` also it will be released in each PR.
 
